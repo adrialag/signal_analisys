@@ -15,6 +15,18 @@ def dsox1102g(misura, div, valore):#valore incertezza dipenderà dalla valore mi
 
 #FLUKE 45
 #aggiungere il manuale del fluke
+#per via dei vari casi per la corrente alternata crea una funzione aggiuntiva
+def alternata(valore):
+    if valore < 300E-3:
+        return 10E-6
+    elif valore < 3:
+        return 100E-6
+    elif valore < 30:
+        return 1E-3
+    elif valore < 300:
+        return 10E-3
+    else:
+        return 100E-3
 def fluke45(misura, div, valore):
     #aggiungere convertitore valore -> div quando possiible almeno stima
     if misura =="r":
@@ -32,4 +44,26 @@ def fluke45(misura, div, valore):
             return valore*0.25+6*100
         elif div==100E3:
             return valore*0.02+2*100E3
-    if misura=="va":
+    if misura=="vc":
+        if valore < 300E-3:
+            return valore*0.025+2*10E-6
+        elif valore < 3:
+            return valore*0.025+2*100E-6
+        elif valore < 30:
+            return valore*0.025+2*1E-3
+        elif valore <300:
+            return valore*0.025+2*10E-3
+        else:
+            return valore*0.025+2*100E-3
+    if misura=="va": #in queste misure div indica la frequenza del segnale
+        if div < 50:
+            return valore*0.02+10*alternata(valore)
+        elif div < 10E3:
+            return valore*0.002+10*alternata(valore)
+        elif div < 20E3:
+            return valore*0.005+10*alternata(valore)
+        elif div < 50E3:
+            return valore*0.02+20*alternata(valore)
+        elif div < 100E3:
+            return valore*0.05+50*alternata(valore)
+
