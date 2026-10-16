@@ -13,5 +13,23 @@ def dsox1102g(misura, div, valore):#valore incertezza dipenderà dalla valore mi
     elif misura=="f":
         return dsox1102g('dt', div, valore)*valore**2
 
-#ALIMENTATORE IN CONTINUA
-
+#FLUKE 45
+#aggiungere il manuale del fluke
+def fluke45(misura, div, valore):
+    #aggiungere convertitore valore -> div quando possiible almeno stima
+    if misura =="r":
+        if div==0.001:
+            return valore*0.05+0.02+8*0.001
+        elif div==0.01:
+            return valore*0.05+0.02+8*0.01
+        elif div==0.1:
+            return valore*0.05+8*0.1
+        elif div==1:
+            return valore*0.05+8
+        elif div==10:
+            return valore*0.06+8*10
+        elif div==100:
+            return valore*0.25+6*100
+        elif div==100E3:
+            return valore*0.02+2*100E3
+    if misura=="va":
