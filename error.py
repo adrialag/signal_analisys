@@ -30,20 +30,20 @@ def alternata(valore):
 def fluke45(misura, div, valore):
     #aggiungere convertitore valore -> div quando possiible almeno stima
     if misura =="r":
-        if div==0.001:
-            return valore*0.05+0.02+8*0.001
-        elif div==0.01:
-            return valore*0.05+0.02+8*0.01
-        elif div==0.1:
-            return valore*0.05+8*0.1
-        elif div==1:
-            return valore*0.05+8
-        elif div==10:
-            return valore*0.06+8*10
-        elif div==100:
-            return valore*0.25+6*100
-        elif div==100E3:
-            return valore*0.02+2*100E3
+        if valore<300:
+            return valore*0.05+0.02+2*0.01
+        elif valore<3E3:
+            return valore*0.05+2*0.1
+        elif valore<30E3:
+            return valore*0.05+2*1
+        elif valore<300E3:
+            return valore*0.05+2*10
+        elif valore<3E6:
+            return valore*0.06+2*100
+        elif valore<30E6:
+            return valore*0.25+3*1000
+        else:
+            return valore*0.02
     if misura=="vc":
         if valore < 300E-3:
             return valore*0.025+2*10E-6
